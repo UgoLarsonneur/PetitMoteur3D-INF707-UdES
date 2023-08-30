@@ -112,7 +112,6 @@ protected:
 	}
 
 
-
 	// Fonctions spécifiques au rendu et à la présentation de la scène
 	virtual bool RenderScene()
 	{
