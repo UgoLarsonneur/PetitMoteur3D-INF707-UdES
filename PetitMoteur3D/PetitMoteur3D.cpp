@@ -48,4 +48,13 @@ int APIENTRY _tWinMain(
 		return 99;
 	}
 
+	catch (const int codeErreur)
+	{
+		wchar_t szErrMsg[MAX_LOADSTRING];// Un message d'erreur selon le code
+		::LoadString(hInstance, codeErreur, szErrMsg, MAX_LOADSTRING);
+		::MessageBox(nullptr, szErrMsg, L"Erreur", MB_ICONWARNING);
+		return (int)99; // POURQUOI 99???
+	}
+
+
 }
