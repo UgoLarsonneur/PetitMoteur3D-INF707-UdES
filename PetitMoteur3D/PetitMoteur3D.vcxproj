@@ -104,6 +104,8 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Dispositif.h" />
+    <ClInclude Include="DispositifD3D11.h" />
     <ClInclude Include="Horloge.h" />
     <ClInclude Include="Moteur.h" />
     <ClInclude Include="MoteurWindows.h" />
