@@ -1,5 +1,6 @@
 #pragma once
 #include "Singleton.h"
+#include "dispositif.h"
 
 namespace PM3D
 {
@@ -20,7 +21,7 @@ const double EcartTemps = 1.0 / static_cast<double>(IMAGESPARSECONDE);
 //        le dispositif Direct3D), l'utilisation d'un singleton 
 //        nous simplifiera plusieurs aspects.
 //
-template <class T> class CMoteur :public CSingleton<T>
+template <class T, class TClasseDispositif> class CMoteur : public CSingleton<T>
 {
 public:
 	virtual void Run()
@@ -46,14 +47,29 @@ public:
 		InitialisationsSpecific();
 
 		// * Initialisation du dispositif de rendu
+		pDispositif = CreationDispositifSpecific(CDS_FENETRE);
+
 
 		// * Initialisation de la scène
 
 		// * Initialisation des paramètres de l'animation et 
 		//   préparation de la première image
-		//InitAnimation();
+		
+		InitAnimation();
 
 		return 0;
+	}
+
+	virtual void Cleanup()
+	{
+		// détruire les objets
+		// à suivre
+		// Détruire le dispositif
+		if (pDispositif)
+		{
+			delete pDispositif;
+			pDispositif = nullptr;
+		}
 	}
 
 	//
@@ -80,12 +96,15 @@ public:
 		if (TempsEcoule > EcartTemps)
 		{
 			// Affichage optimisé 
-			// pDispositif->Present() ; // On enlevera « // » plus tard
+			pDispositif->Present() ; // On enlevera « // » plus tard
+
 			// On prépare la prochaine image
 			// AnimeScene(TempsEcoule) ;
+			// 
 			// On rend l’image sur la surface de travail
 			// (tampon d’arrière plan)
 			RenderScene();
+
 			// Calcul du temps du prochain affichage
 			mTempsCompteurPrecedent = TempsCompteurCourant;
 		}
@@ -98,7 +117,11 @@ protected:
 	int64_t mTempsSuivant;
 	int64_t mTempsCompteurPrecedent;
 
-	virtual ~CMoteur() = default;
+	// Destructeur
+	~CMoteur()
+	{
+		Cleanup();
+	}
 
 	virtual int InitAnimation()
 	{
@@ -112,11 +135,18 @@ protected:
 	}
 
 
-	// Fonctions spécifiques au rendu et à la présentation de la scène
+	// Fonctions de rendu et de présentation de la scène
 	virtual bool RenderScene()
 	{
+		BeginRenderSceneSpecific();
+		// Appeler les fonctions de dessin de chaque objet de la scène
+		// à suivre...
+		EndRenderSceneSpecific();
 		return true;
 	}
+
+	virtual TClasseDispositif* CreationDispositifSpecific(const CDS_MODE cdsMode) = 0;
+
 
 
 	// Spécifiques - Doivent être implantés
@@ -125,6 +155,13 @@ protected:
 
 	virtual bool RunSpecific() = 0;
 	virtual int InitialisationsSpecific() = 0;
+
+	virtual void BeginRenderSceneSpecific() = 0;
+	virtual void EndRenderSceneSpecific() = 0;
+
+	// Le dispositif de rendu
+	TClasseDispositif* pDispositif;
+
 };
 
 } // namespace PM3D

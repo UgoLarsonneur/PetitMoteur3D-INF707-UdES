@@ -125,6 +125,35 @@ bool CMoteurWindows::RunSpecific()
 	return bBoucle;
 }
 
+// FONCTION : CreationDispositifSpecific 
+//
+// BUT : Fonction responsable de créer le 
+// dispositif selon certains paramètres
+// NOTES:
+// CDS_MODE: CDS_FENETRE application fenêtrée
+// CDS_PLEIN_ECRAN application plein écran
+//
+CDispositifD3D11* CMoteurWindows::CreationDispositifSpecific(const CDS_MODE
+	cdsMode)
+{
+	return new CDispositifD3D11(cdsMode, hMainWnd);
+}
+
+void CMoteurWindows::BeginRenderSceneSpecific()
+{
+	ID3D11DeviceContext* pImmediateContext = pDispositif->GetImmediateContext();
+	ID3D11RenderTargetView* pRenderTargetView = pDispositif->GetRenderTargetView();
+	// On efface la surface de rendu
+	float Couleur[4] = { 0.1f, 0.5f, 0.75f, 1.0f }; // RGBA - Vert pour le moment
+	pImmediateContext->ClearRenderTargetView(pRenderTargetView, Couleur);
+}
+
+void CMoteurWindows::EndRenderSceneSpecific()
+{
+
+}
+
+
 
 //
 // FONCTION : GetTimeSpecific 

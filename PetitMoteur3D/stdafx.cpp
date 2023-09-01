@@ -4,10 +4,6 @@
 
 #include "stdafx.h"
 
-#define _XM_NO_INTRINSICS_
-#include <d3d11.h>
-#include <DirectXMath.h>
-
 
 // TODO : faites référence aux en-têtes supplémentaires nécessaires dans STDAFX.H
 // absents de ce fichier

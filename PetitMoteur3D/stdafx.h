@@ -18,3 +18,6 @@
 #include <exception>
 
 // TODO : faites référence ici aux en-têtes supplémentaires nécessaires au programme
+#define _XM_NO_INTRINSICS_
+#include <d3d11.h>
+#include <DirectXMath.h>

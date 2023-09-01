@@ -18,10 +18,8 @@
 // Français (Canada) resources
 
 #if !defined(AFX_RESOURCE_DLL) || defined(AFX_TARG_FRC)
-#ifdef _WIN32
 LANGUAGE LANG_FRENCH, SUBLANG_FRENCH_CANADIAN
 #pragma code_page(1252)
-#endif //_WIN32
 
 /////////////////////////////////////////////////////////////////////////////
 //
@@ -31,14 +29,16 @@ LANGUAGE LANG_FRENCH, SUBLANG_FRENCH_CANADIAN
 // Icon with lowest ID value placed first to ensure application icon
 // remains consistent on all systems.
 IDI_PETITMOTEUR3D       ICON                    "PetitMoteur3D.ico"
+
 IDI_SMALL               ICON                    "small.ico"
+
 
 /////////////////////////////////////////////////////////////////////////////
 //
 // Menu
 //
 
-IDC_PETITMOTEUR3D MENU 
+IDC_PETITMOTEUR3D MENU
 BEGIN
     POPUP "&Fichier"
     BEGIN
@@ -56,7 +56,7 @@ END
 // Accelerator
 //
 
-IDC_PETITMOTEUR3D ACCELERATORS 
+IDC_PETITMOTEUR3D ACCELERATORS
 BEGIN
     "?",            IDM_ABOUT,              ASCII,  ALT
     "/",            IDM_ABOUT,              ASCII,  ALT
@@ -68,7 +68,7 @@ END
 // Dialog
 //
 
-IDD_ABOUTBOX DIALOG  22, 17, 230, 75
+IDD_ABOUTBOX DIALOG 22, 17, 230, 75
 STYLE DS_SETFONT | DS_MODALFRAME | WS_CAPTION | WS_SYSMENU
 CAPTION "À propos de"
 FONT 8, "System"
@@ -113,9 +113,13 @@ END
 // String Table
 //
 
-STRINGTABLE 
+STRINGTABLE
 BEGIN
     IDS_APP_TITLE           "PetitMoteur3D"
+    DXE_ERREURCREATIONDEVICE "Erreur dans la création du dispositif"
+    DXE_ERREUROBTENTIONBUFFER "Erreur dans l'optention du backbuffer"
+    DXE_ERREURCREATIONRENDERTARGET 
+                            "Erreur dans la création du render target view"
     IDC_PETITMOTEUR3D       "PETITMOTEUR3D"
 END
 
